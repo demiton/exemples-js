@@ -3,29 +3,6 @@
 // https://daveceddia.com/waiting-for-promises-in-a-loop/
 //https://mcculloughwebservices.com/2017/10/12/nodejs-request-file-parsing-readline/
 /*
-var Promise = require('bluebird');
-var fs = Promise.promisifyAll(require('fs'));
-
- function getImage(index) {
-     var imgPath = __dirname + "/image1" + index + ".png";
-     return fs.readFileAsync(imgPath);
- }
-
- function getAllImages() {
-    var promises = [];
-    // load all images in parallel
-    for (var i = 0; i <= 2; i++) {
-        promises.push(getImage(i));
-    }
-    // return promise that is resolved when all images are done loading
-    return Promise.all(promises);
- }
-
- getAllImages().then(function(imageArray) {
-    // you have an array of image data in imageArray
- }, function(err) {
-    // an error occurred
- });
 */
 
 
@@ -161,7 +138,6 @@ function readFromFolder(folder){
             var filelist = [];
             walkSync(folder,filelist,'.csv');
             // Loop on files
-
             loopTroughFile(filelist).then(function() {
                // you have an array of image data in imageArray
                  console.log('************************* Fin traitement *************************');
@@ -218,11 +194,9 @@ function readAllLineFrom(file){
         input: fs.createReadStream(file),
         crlfDelay: Infinity
         });
-
       printLine(rl);
       rl.on('close', () => resolve());
   });
-
 }
 
 function printLine(stream){
@@ -232,44 +206,6 @@ function printLine(stream){
       });
     })
 }
-/*
-const j = 10;
-for (let i = 0; i < j; i++) {
-    asynchronousProcess(function() {
-        console.log(i);
-    });
-}
-
-
-
-var isPaused = false;
-
-function firstFunction(){
-    isPaused = true;
-    for(i=0;i<x;i++){
-        // do something
-    }
-    isPaused = false;
-};
-
-function secondFunction(){
-    firstFunction()
-
-    alert("Here");
-
-    function waitForIt(){
-        if (isPaused) {
-            setTimeout(function(){waitForIt()},100);
-        } else {
-            // go do that thing
-        };
-    }
-};
-
-
-*/
-
-
 
 readFromFile(nameFile);
 readFromFolder(nameFile);
